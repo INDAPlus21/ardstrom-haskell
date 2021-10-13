@@ -10,7 +10,28 @@ fib n =
     in  fibr (n-2) 0 1
 
 
-rovarsprak s = s
-karpsravor s = s
+--Rövarspråket encoder till och med z
+consonants = "bcdfghjklmnpqrstvwxz"
+vowels = "aeiouy"
+
+rovarsprak :: String -> String
+rovarsprak [] = []
+rovarsprak (x:xs)
+    | x `elem` consonants = [x] ++ "o" ++ [x] ++ next
+    | otherwise = [x] ++ next
+    where next = rovarsprak xs
+
+
+--Rövarspråket decoder till och med z
+karpsravor :: String -> String
+karpsravor [] = []
+karpsravor (x:xs)
+    | x `elem` consonants = [x] ++ karpsravor (drop 2 xs)
+    | otherwise = [x] ++ next
+    where next = karpsravor xs
+
+
+
 medellangd s = 1.0
 skyffla s = s
+    
