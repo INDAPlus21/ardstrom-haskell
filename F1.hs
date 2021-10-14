@@ -1,5 +1,6 @@
 module F1 where
-
+import Data.Char
+import Data.List.Split
 -- Vad ska de andra funktionernas typsignaturer vara?
 fib :: Integer -> Integer
 fib 0 = 0
@@ -10,10 +11,11 @@ fib n =
     in  fibr (n-2) 0 1
 
 
---Rövarspråket encoder till och med z
+--Rövarspråket constants
 consonants = "bcdfghjklmnpqrstvwxz"
 vowels = "aeiouy"
 
+--Rövarspråket encoder till och med z
 rovarsprak :: String -> String
 rovarsprak [] = []
 rovarsprak (x:xs)
@@ -31,7 +33,31 @@ karpsravor (x:xs)
     where next = karpsravor xs
 
 
+--shitty inverse isAlpha function for medellagd
+inverseIsAlpha :: Char -> Bool 
+inverseIsAlpha x = isAlpha x == False
 
-medellangd s = 1.0
+
+
+--medellangd of words in string calculator
+medellangd :: String -> Double
+medellangd [] = 0;
+medellangd s = 
+    let words = filter  (/= "") (splitWhen (inverseIsAlpha) s)
+        nrOfWords = length words
+    in  (fromIntegral(countAllTheWordsPlease words)) /  (fromIntegral nrOfWords)
+
+countAllTheWordsPlease :: [String] -> Int
+countAllTheWordsPlease [] = 0
+countAllTheWordsPlease (x:xs) 
+    | otherwise = (length x) + countAllTheWordsPlease xs
+
+
+
+
+
+--medellangd s = 1.0
+
+
 skyffla s = s
     
