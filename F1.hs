@@ -1,6 +1,8 @@
 module F1 where
 import Data.Char
 import Data.List.Split
+import Data.List
+import Data.Maybe
 -- Vad ska de andra funktionernas typsignaturer vara?
 fib :: Integer -> Integer
 fib 0 = 0
@@ -12,8 +14,8 @@ fib n =
 
 
 --Rövarspråket constants
-consonants = "bcdfghjklmnpqrstvwxz"
-vowels = "aeiouy"
+consonants = "bcdfghjklmnpqrstvwxz" 
+vowels = "aeiouy" -- Används inte men cool att ha
 
 --Rövarspråket encoder till och med z
 rovarsprak :: String -> String
@@ -37,8 +39,6 @@ karpsravor (x:xs)
 inverseIsAlpha :: Char -> Bool 
 inverseIsAlpha x = isAlpha x == False
 
-
-
 --medellangd of words in string calculator
 medellangd :: String -> Double
 medellangd [] = 0;
@@ -47,17 +47,17 @@ medellangd s =
         nrOfWords = length words
     in  (fromIntegral(countAllTheWordsPlease words)) /  (fromIntegral nrOfWords)
 
+--method to count and sum all the letters in a list of words
 countAllTheWordsPlease :: [String] -> Int
 countAllTheWordsPlease [] = 0
 countAllTheWordsPlease (x:xs) 
     | otherwise = (length x) + countAllTheWordsPlease xs
 
 
+--skyffla alla saker omkring utan aledning 
+skyffla :: Eq a =>[a] -> [a] 
+skyffla [] = []
+skyffla [x] = [x]
+skyffla xs = [x | x <- xs, even (fromMaybe (-1) $ elemIndex x xs)] ++ skyffla ([y | y <- xs, odd (fromMaybe (-1) $ elemIndex y xs)])
 
-
-
---medellangd s = 1.0
-
-
-skyffla s = s
     
