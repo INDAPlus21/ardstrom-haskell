@@ -54,10 +54,25 @@ countAllTheWordsPlease (x:xs)
     | otherwise = (length x) + countAllTheWordsPlease xs
 
 
+
+
+
+everyOther :: [a] -> [a] 
+everyOther [] = []
+everyOther [x] = [x]
+everyOther [x,y] = [x]  
+everyOther (x:y:xs) = [x] : everyOther xs
+
 --skyffla alla saker omkring utan aledning 
-skyffla :: Eq a =>[a] -> [a] 
+skyffla :: [a] -> [a] 
 skyffla [] = []
 skyffla [x] = [x]
-skyffla xs = [x | x <- xs, even (fromMaybe (-1) $ elemIndex x xs)] ++ skyffla ([y | y <- xs, odd (fromMaybe (-1) $ elemIndex y xs)])
+skyffla x = everyOther x : skyffla (everyOther (tail x))
 
-    
+
+
+--min första lösning som funkar men som kattis gillar inte den troligen pga "Eq a =>"
+--skyffla :: Eq a =>[a] -> [a] 
+--skyffla [] = []
+--skyffla [x] = [x]
+--skyffla xs = [x | x <- xs, even $ fromJust $ elemIndex x xs] ++ skyffla ([y | y <- xs, odd $ fromJust $ elemIndex y xs])
